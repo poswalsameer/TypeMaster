@@ -3,7 +3,7 @@ import {generate, count} from 'random-words';
 import { useState } from 'react';
 import { useEffect } from 'react';
 
-function WordBox() {
+function WordBox(props) {
 
     // console.log(generate(10));
     // generate(N) --> this is the syntax to generate random N words, the output will be in the form of an array
@@ -24,7 +24,7 @@ function WordBox() {
         <div className=' h-56 w-3/4 border-4 p-5 border-blue-300 rounded-2xl bg-black text-white flex flex-row flex-wrap'>
 
                 
-                {generatedWords.map( (eachWord, index) => ( <p className= {`m-3 text-2xl font-bold ${index === activeWord ? "text-yellow-300" : "text-white" } `} > {eachWord} </p> ) )}
+                {generatedWords.map( (eachWord, index) => ( <p className= {`m-3 text-2xl font-bold ${index === props.activeWord ? "text-yellow-300" : "text-white" } `} > {eachWord} </p> ) )}
 
         </div>
       
