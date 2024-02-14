@@ -3,7 +3,7 @@ import { useState } from 'react'
 import './App.css'
 import {generate, count} from 'random-words';
 
-let generatedWords = generate(45);
+let generatedWords = generate(50);
 
 function App() {
   
@@ -58,7 +58,7 @@ function App() {
           TYPE MASTER
         </p>
 
-        <div className=' h-80 w-3/4 border-4 p-5 border-blue-300 rounded-2xl bg-black text-white flex flex-row flex-wrap'>
+        <div className=' h-80 w-3/4 border-4 p-5 border-blue-300 rounded-2xl bg-black text-white flex flex-row flex-wrap break-words'>
 
         {/* index === activeWord ? correctWord ? "text-green-300" : "text-red-400" : "text-white" */}
                 
