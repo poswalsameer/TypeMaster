@@ -2,6 +2,7 @@
 import { useState } from 'react'
 import './App.css'
 import {generate, count} from 'random-words';
+import { Link } from 'react-router-dom';
 
 let generatedWords = generate(50);
 
@@ -12,6 +13,20 @@ function App() {
   const [currentWord, setCurrentWord] = useState('');
   const [activeWord, setActiveWord] = useState(0);
   const [correctWord, setCorrectWord] = useState(Array(generatedWords.length).fill(false));
+  const [timer, setTimer] = useState(5);
+  
+  const startTimer = () => {
+    setInterval(() => {
+
+      if( timer > 0 ){
+        setTimer(timer => timer-1);
+      }
+      else{
+        < Link />
+      }
+
+    }, 1000);
+  }
 
   const spaceClicked = (word) => {
 
@@ -52,11 +67,13 @@ function App() {
   return (
     <>
       
-      <div className='h-screen w-screen flex flex-col justify-around items-center' >
+      <div className='h-screen w-screen flex flex-col justify-evenly items-center' >
 
         <p className='text-yellow-400 text-8xl font-extrabold' >
           TYPE MASTER
         </p>
+
+        <div className='text-xl font-extrabold bg-green-200 px-4 py-3 rounded-full'>{timer}</div>
 
         <div className=' h-80 w-3/4 border-4 p-5 border-blue-300 rounded-2xl bg-black text-white flex flex-row flex-wrap break-words'>
 
@@ -68,6 +85,8 @@ function App() {
                 `} > {eachWord} </p> ) )}
 
         </div>
+
+        <button className='h-10 w-16 rounded-lg border-2 border-yellow-950 bg-yellow-100 font-bold' onClick={startTimer}>Start</button>
 
         <input type="text" id="inputBox" className='h-16 w-[40rem] p-5 bg-white rounded-xl text-black font-bold border-4 border-black outline-none focus:border-4 focus:border-blue-600' value={currentWord} onChange={ (e) => spaceClicked(e.target.value) } />
 
