@@ -15,8 +15,12 @@ function App() {
   const [correctWord, setCorrectWord] = useState(Array(generatedWords.length).fill(false));
   const [correctWordString, setCorrectWordString] = useState('');
   const [timer, setTimer] = useState(5);
+  const [correctWordCount, setCorrectWordCount] = useState(0);
   const [timerRunning, setTimerRunning] = useState(false);
   const [timerStopped, setTimerStopped] = useState(false);
+
+  //for the result page
+  const [testRunning, setTestRunning] = useState(true);
 
   useEffect(() => {
 
@@ -35,6 +39,7 @@ function App() {
       if(timer === 0 ){
         clearInterval(intervalID);
         setTimerRunning(false);
+        setTestRunning(false);
         setTimerStopped(true);
       }
     
@@ -42,7 +47,22 @@ function App() {
 
   }, [timer, timerRunning]);
 
+  const takeTestAgain = () => {
+    setTestRunning(true);
+    setCurrentWord('');
+    setActiveWord(0);
+    setCorrectWordString('');
+    setCorrectWordCount(0);
+    setTimer(5);
+    setTimerRunning(false);
+    setTimerStopped(false);
+    
+  }
+
   const startTimer = () => {
+    setActiveWord(0);
+    setCorrectWordString('');
+    setCorrectWordCount(0);
     setTimerRunning(true);
   }
 
@@ -58,6 +78,8 @@ function App() {
         newCorrectWords[activeWord] = true;
         setCorrectWord(newCorrectWords);
         setCorrectWordString( correctWordString.concat(word.trim()) );
+        setCorrectWordCount(prevCount => prevCount+1);
+        // console.log(correctWordCount);
         
       }
       else{
@@ -80,11 +102,12 @@ function App() {
 
   useEffect(() => {
     console.log(correctWordString);
+    console.log(correctWordCount);
   }, [correctWordString]);
 
 
   return (
-  !timerStopped ? <>
+  !timerStopped || testRunning ? <>
       
       <div className='h-screen w-screen flex flex-col justify-evenly items-center' >
 
@@ -112,7 +135,7 @@ function App() {
       </div>
 
 
-    </> : < Result />
+    </> : < Result totalWords={50} correctWords={correctWordCount} wrongWords={50-correctWordCount} accuracy={(correctWordCount/50)*100} speed={correctWordCount*2} takeTest={takeTestAgain}/>
   )
 }
 
