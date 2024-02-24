@@ -4,7 +4,7 @@ import './App.css'
 import {generate, count} from 'random-words';
 import Result from './Result';
 
-let generatedWords = generate(50);
+let generatedWords = generate(40);
 
 function App() {
   
@@ -50,6 +50,7 @@ function App() {
   }, [timer, timerRunning]);
 
   const takeTestAgain = () => {
+    generatedWords = Object.assign(generate(40));
     setTestRunning(true);
     setCurrentWord('');
     setActiveWord(0);
@@ -63,6 +64,7 @@ function App() {
 
   const startTimer = () => {
     setActiveWord(0);
+    setCurrentWord('');
     setCorrectWordString('');
     setCorrectWordCount(0);
     setTimerRunning(true);
@@ -75,9 +77,8 @@ function App() {
 
     if( word.endsWith(' ')){
 
-      // word = word.slice(0, word.length-1);
-      if( activeWord == 49 ){
-        generatedWords = Object.assign(generate(50));
+      if( activeWord == 39 ){
+        generatedWords = Object.assign(generate(40));
         setActiveWord(-1);
         setCorrectWord(Array(generatedWords.length).fill(false))
       }
@@ -121,33 +122,33 @@ function App() {
   return (
   !timerStopped || testRunning ? <>
       
-      <div className='h-screen w-screen flex flex-col justify-evenly items-center' >
+      <div className='h-screen w-screen bg-slate-900 flex flex-col justify-evenly items-center' >
 
-        <p className='mt-4 text-yellow-400 text-8xl font-extrabold' >
+        <p className='mt-4 text-[#fefae0] text-8xl font-extrabold' >
           TYPE MASTER 
         </p>
 
-        <div className='ml-[65rem] h-10 w-10 text- flex justify-center items-center font-extrabold bg-green-200 px-4 py-3 rounded-full'>{timer}</div>
+        <div className='h-10 w-10 my-5 text-3xl text-white flex justify-center items-center font-extrabold  rounded-full'>{timer}</div>
 
-        <div className=' h-80 w-3/4 border-4 p-5 border-blue-300 rounded-2xl bg-black text-white flex flex-row flex-wrap break-words'>
+        <div className=' h-72 w-4/5 p-5 border-2 rounded-2xl overflow-hidden bg-slate-900 text-white flex flex-row flex-wrap break-words'>
 
         {/* index === activeWord ? correctWord ? "text-green-300" : "text-red-400" : "text-white" */}
                 
                 {generatedWords.map( (eachWord, index) => ( <p className= {`m-3 text-2xl font-bold ${index < activeWord && correctWord[index]
-                ? 'text-green-500' : 'text-red-500' } ${ index > activeWord ? 'text-slate-200' : '' } 
+                ? 'text-green-500' : 'text-red-500' } ${ index > activeWord ? 'text-[#fefae0]' : '' } 
                 
                 `} > {eachWord} </p> ) )}
 
         </div>
 
-        <button className='my-3 h-10 w-16 rounded-lg border-2 border-yellow-950 bg-yellow-100 font-bold' onClick={startTimer}>Start</button>
+        <button className='my-5 h-8 w-16 rounded-md text-slate-900 border-2 border-[#fefae0] bg-[#fefae0] hover:text-[#fefae0] hover:bg-slate-900 text-sm font-bold' onClick={startTimer}>Start</button>
 
-        <input type="text" id="inputBox" className=' mb-10 h-16 w-[40rem] p-5 bg-white rounded-xl text-black font-bold border-4 border-black outline-none focus:border-4 focus:border-blue-600' value={currentWord} onChange={ (e) => spaceClicked(e.target.value) } />
+        <input type="text" id="inputBox" className=' mb-10 h-14 w-[40rem] p-5 bg-[#d4a373] rounded-xl text-slate-900 font-bold border-[3px] border-[#fefae0] outline-none focus:bg-[#fefae0] focus:border-[3px] focus:border-[#d4a373]' value={currentWord} onChange={ (e) => spaceClicked(e.target.value) } />
 
       </div>
 
 
-    </> : < Result totalWords={50} correctWords={correctWordCount} wrongWords={wrongWordCount} accuracy={(correctWordCount/typedWords)*100} speed={correctWordCount*2} takeTest={takeTestAgain}/>
+    </> : < Result correctWords={correctWordCount} wrongWords={wrongWordCount} accuracy={Math.round((correctWordCount/typedWords)*100)} speed={Math.round((correctWordString.length*2)/3.8)} takeTest={takeTestAgain}/>
   )
 }
 
