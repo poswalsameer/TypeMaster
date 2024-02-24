@@ -1,5 +1,5 @@
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import './App.css'
 import {generate, count} from 'random-words';
 import Result from './Result';
@@ -14,8 +14,10 @@ function App() {
   const [activeWord, setActiveWord] = useState(0);
   const [correctWord, setCorrectWord] = useState(Array(generatedWords.length).fill(false));
   const [correctWordString, setCorrectWordString] = useState('');
-  const [timer, setTimer] = useState(5);
+  const [timer, setTimer] = useState(30);
   const [correctWordCount, setCorrectWordCount] = useState(0);
+  const [wrongWordCount, setWrongWordCount] = useState(0);
+  const [typedWords, setTypedWords] = useState(0);
   const [timerRunning, setTimerRunning] = useState(false);
   const [timerStopped, setTimerStopped] = useState(false);
 
@@ -53,7 +55,7 @@ function App() {
     setActiveWord(0);
     setCorrectWordString('');
     setCorrectWordCount(0);
-    setTimer(5);
+    setTimer(30);
     setTimerRunning(false);
     setTimerStopped(false);
     
@@ -69,9 +71,16 @@ function App() {
 
   const spaceClicked = (word) => {
 
+    
+
     if( word.endsWith(' ')){
 
       // word = word.slice(0, word.length-1);
+      if( activeWord == 49 ){
+        generatedWords = Object.assign(generate(50));
+        setActiveWord(-1);
+        setCorrectWord(Array(generatedWords.length).fill(false))
+      }
 
       if( word.trim()  === generatedWords[activeWord] ){
         const newCorrectWords = [...correctWord];
@@ -79,6 +88,7 @@ function App() {
         setCorrectWord(newCorrectWords);
         setCorrectWordString( correctWordString.concat(word.trim()) );
         setCorrectWordCount(prevCount => prevCount+1);
+        setTypedWords(prev => prev+1);
         // console.log(correctWordCount);
         
       }
@@ -86,6 +96,8 @@ function App() {
         const newCorrectWords = [...correctWord];
         newCorrectWords[activeWord] = false;
         setCorrectWord(newCorrectWords);
+        setWrongWordCount(prevCount => prevCount+1);
+        setTypedWords(prev => prev+1);
         
       }
 
@@ -135,7 +147,7 @@ function App() {
       </div>
 
 
-    </> : < Result totalWords={50} correctWords={correctWordCount} wrongWords={50-correctWordCount} accuracy={(correctWordCount/50)*100} speed={correctWordCount*2} takeTest={takeTestAgain}/>
+    </> : < Result totalWords={50} correctWords={correctWordCount} wrongWords={wrongWordCount} accuracy={(correctWordCount/typedWords)*100} speed={correctWordCount*2} takeTest={takeTestAgain}/>
   )
 }
 
