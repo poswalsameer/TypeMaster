@@ -72,6 +72,11 @@ function App() {
     setTimerRunning(true);
   }
 
+  const keyPressed = () => {
+    let keySound = new Audio('keySound.mp3');
+    keySound.play();
+  }
+
 
   const spaceClicked = (word) => {
 
@@ -207,7 +212,7 @@ function App() {
         
         xl:mb-10 xl:h-14 xl:w-[40rem] xl:p-5 xl:bg-[#d4a373] xl:rounded-xl xl:text-slate-900 xl:font-bold xl:border-[3px] xl:border-[#fefae0] xl:outline-none xl:focus:bg-[#fefae0] xl:focus:border-[3px] xl:focus:border-[#d4a373]
         
-        2xl:mb-10 2xl:h-14 2xl:w-[40rem] 2xl:p-5 2xl:bg-[#d4a373] 2xl:rounded-xl 2xl:text-slate-900 2xl:font-bold 2xl:border-[3px] 2xl:border-[#fefae0] 2xl:outline-none 2xl:focus:bg-[#fefae0] 2xl:focus:border-[3px] 2xl:focus:border-[#d4a373]' value={currentWord} onChange={ (e) => spaceClicked(e.target.value) } />
+        2xl:mb-10 2xl:h-14 2xl:w-[40rem] 2xl:p-5 2xl:bg-[#d4a373] 2xl:rounded-xl 2xl:text-slate-900 2xl:font-bold 2xl:border-[3px] 2xl:border-[#fefae0] 2xl:outline-none 2xl:focus:bg-[#fefae0] 2xl:focus:border-[3px] 2xl:focus:border-[#d4a373]' value={currentWord} onChange={ (e) => spaceClicked(e.target.value) } onKeyDown={keyPressed} />
 
       </div>
 
