@@ -167,7 +167,11 @@ function App() {
         
         xl:h-10 xl:w-10 xl:my-5 xl:text-3xl xl:text-white xl:flex xl:justify-center xl:items-center xl:font-extrabold xl:rounded-full
         
-        2xl:h-10 2xl:w-10 2xl:my-5 2xl:text-3xl 2xl:text-white 2xl:flex 2xl:justify-center 2xl:items-center 2xl:font-extrabold  2xl:rounded-full'>{timer}</div>
+        2xl:h-10 2xl:w-10 2xl:my-5 2xl:text-3xl 2xl:text-white 2xl:flex 2xl:justify-center 2xl:items-center 2xl:font-extrabold  2xl:rounded-full ' id={ timerRunning ? "timerAnimation" : "" } >
+
+          {timer}
+
+        </div>
 
         <div className='h-80 w-[93%] p-3 border-2 rounded-2xl overflow-hidden bg-slate-900 text-white flex flex-row flex-wrap break-words
         
@@ -179,7 +183,7 @@ function App() {
         
         xl:h-80 xl:w-[90%] xl:p-5 xl:border-2 xl:rounded-2xl xl:overflow-hidden xl:bg-slate-900 xl:text-white xl:flex xl:flex-row xl:flex-wrap xl:break-words
         
-        2xl:h-72 2xl:w-4/5 2xl:p-5 2xl:border-2 2xl:rounded-2xl 2xl:overflow-hidden 2xl:bg-slate-900 2xl:text-white 2xl:flex 2xl:flex-row 2xl:flex-wrap 2xl:break-words'>
+        2xl:h-72 2xl:w-4/5 2xl:p-5 2xl:border-2 2xl:rounded-2xl 2xl:overflow-hidden 2xl:bg-slate-900 2xl:text-white 2xl:flex 2xl:flex-row 2xl:flex-wrap 2xl:break-words' id='wordDiv'>
 
         {/* index === activeWord ? correctWord ? "text-green-300" : "text-red-400" : "text-white" */}
                 
@@ -202,7 +206,7 @@ function App() {
         
         2xl:my-5 2xl:h-8 2xl:w-16 2xl:rounded-md 2xl:text-slate-900 2xl:border-2 2xl:border-[#fefae0] 2xl:bg-[#fefae0] 2xl:hover:text-[#fefae0] 2xl:hover:bg-slate-900 2xl:text-sm 2xl:font-bold' onClick={startTimer}>Start</button>
 
-        <input type="text" id="inputBox" className='mb-10 h-12 w-[18rem] p-5 bg-[#d4a373] rounded-xl text-slate-900 font-bold border-[3px] border-[#fefae0] outline-none focus:bg-[#fefae0] focus:border-[3px] focus:border-[#d4a373]
+        <input type="text" id="inputBox" className='mb-10 h-10 w-[15rem] p-5 bg-[#d4a373] rounded-xl text-slate-900 font-bold border-[3px] border-[#fefae0] outline-none focus:bg-[#fefae0] focus:border-[3px] focus:border-[#d4a373]
         
         sm:mb-10 sm:h-14 sm:w-[30rem] sm:p-5 sm:bg-[#d4a373] sm:rounded-xl sm:text-slate-900 sm:font-bold sm:border-[3px] sm:border-[#fefae0] sm:outline-none sm:focus:bg-[#fefae0] sm:focus:border-[3px] sm:focus:border-[#d4a373]
         
